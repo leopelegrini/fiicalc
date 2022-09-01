@@ -45,7 +45,7 @@ class CadastrarNegociacaoAction
 
 			$negociacao->taxas = $this->data['taxas'];
 
-			$negociacao->valor = $negociacao->taxas;
+			$negociacao->valor = 0;
 
 			foreach($this->data['ativos'] as $ativo){
 				$negociacao->valor = bcadd($negociacao->valor, $ativo['preco_total_bruto'], 8);
@@ -69,7 +69,7 @@ class CadastrarNegociacaoAction
 
 				$lancamento->data = $negociacao->data;
 
-				$lancamento->operacao = bccomp($ativo['qtd'], 0, 1) === 1 ? 0 : 1;
+				$lancamento->operacao = intval($ativo['operacao']);
 
 				$lancamento->qtd = $ativo['qtd'];
 
@@ -116,7 +116,7 @@ class CadastrarNegociacaoAction
 
 					$lancamento->preco_unitario_mp = $ultimo_lancamento->preco_unitario_mp;
 
-					$lancamento->qtd_acumulada = bcadd($ultimo_lancamento->qtd_acumulada, $lancamento->qtd, 0);
+					$lancamento->qtd_acumulada = bcsub($ultimo_lancamento->qtd_acumulada, $lancamento->qtd, 0);
 
 					$lancamento->saldo_venda = bcmul(bcsub($lancamento->preco_unitario_liquido, $lancamento->preco_unitario_mp, 8), $lancamento->qtd, 8);
 				}
@@ -134,11 +134,16 @@ class CadastrarNegociacaoAction
 				$ativo_posicao->save();
 			}
 
+			$negociacao->valor = bcadd($negociacao->valor, $negociacao->taxas, 2);
+
+			$negociacao->save();
+
 			DB::commit();
 
 			return [
 				'status' => 'success',
-				'message' => 'Negociação lançada com sucesso'
+				'message' => 'Negociação lançada com sucesso',
+				'data' => $negociacao
 			];
 		}
 		catch(Exception $e){
@@ -171,18 +176,24 @@ class CadastrarNegociacaoAction
 				'qtd' => [
 					'bail',
 					'required',
-					'regex:/^\d{1,3}(.\d{3})*(\,\d{2})?$/'
+					'regex:/^\d{1,3}(.\d{3})*(\,\d{2,4})?$/'
 				],
 				'preco' => [
 					'bail',
 					'required',
 					'regex:/^\d{1,3}(.\d{3})*(\,\d{2,4})?$/'
+				],
+				'operacao' => [
+					'required',
+					'in:0,1'
 				]
 			], [
 				'qtd.required' => 'Preencha a quantidade',
 				'qtd.regex' => 'Preencha uma quantidade válida',
 				'preco.required' => 'Preencha o preço',
 				'preco.regex' => 'Preencha um preço válido',
+				'operacao.required' => 'Selecione a operação',
+				'operacao.in' => 'Operação inválida'
 			]);
 
 			if($validator->fails()){

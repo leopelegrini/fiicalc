@@ -43,9 +43,18 @@
 					<nv-currency v-model="ativo_aux.preco" class="form-input text-right" :places="2"></nv-currency>
 				</div>
 				<div class="col-md-3">
-					<button type="button" class="nv-btn nv-btn-primary nv-btn-block" @click="adicionarAtivo(ativo_aux)" :disabled="!ativo_aux.id || !ativo_aux.qtd || !ativo_aux.preco">
-						Adicionar
-					</button>
+					<div class="d-flex align-items-end">
+						<div class="mr-2 flex-grow-1">
+							<label for="" class="form-label">Operação</label>
+							<select class="form-input" v-model="ativo_aux.operacao">
+								<option value="0">Compra</option>
+								<option value="1">Venda</option>
+							</select>
+						</div>
+						<button type="button" class="nv-btn nv-btn-primary" @click="adicionarAtivo(ativo_aux)" :disabled="!ativo_aux.id || !ativo_aux.qtd || !ativo_aux.preco">
+							<span class="la la-plus"></span>
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -58,6 +67,7 @@
 							<th>Ativo</th>
 							<th class="text-right" style="width:120px;">Quantidade</th>
 							<th class="text-right" style="width:120px;">Preço</th>
+							<th style="width:120px;">Operação</th>
 							<th class="collapsed"></th>
 						</tr>
 					</thead>
@@ -78,6 +88,15 @@
 								<nv-currency v-model="ativo.preco" class="form-input text-right" :places="2"></nv-currency>
 								<div class="help-block help-block-danger" v-if="errors.ativos && errors.ativos[index] && errors.ativos[index].preco">
 									@{{ errors.ativos[index].preco[0] }}
+								</div>
+							</td>
+							<td>
+								<select class="form-input" v-model="ativo.operacao">
+									<option value="0">Compra</option>
+									<option value="1">Venda</option>
+								</select>
+								<div class="help-block help-block-danger" v-if="errors.ativos && errors.ativos[index] && errors.ativos[index].operacao">
+									@{{ errors.ativos[index].operacao[0] }}
 								</div>
 							</td>
 							<td class="collapsed">
@@ -109,7 +128,8 @@
 				id: '',
 				text: '',
 				qtd: '',
-				preco: ''
+				preco: '',
+				operacao: 0
 			},
 			data: '{{ date("Y-m-d") }}',
 			taxas: '0,00',
@@ -124,7 +144,8 @@
 					id: ativo.id,
 					codigo: this.lista_ativos[ativo.id].codigo,
 					qtd: ativo.qtd,
-					preco: ativo.preco
+					preco: ativo.preco,
+					operacao: ativo.operacao
 				});
 
 				this.ativo_aux.id = '';
@@ -151,8 +172,7 @@
 					ativos: vm.ativos
 				})
 				.then(function(response){
-					//window.location.href = '/negociacoes/' + response.data.data.negociacao.id;
-					window.location.href = '{{ route("negociacoes.index") }}';
+					window.location.href = '/negociacoes/' + response.data.id;
 				})
 				.catch(function(error){
 
@@ -162,6 +182,9 @@
 						toastr.error(error.response.data.message);
 					}
 
+					vm.loading = false;
+				})
+				.then(function(){
 					vm.loading = false;
 				});
 			}

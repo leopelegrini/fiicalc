@@ -276,13 +276,17 @@
 	pointer-events:none;
 	&:after {
 		display:inline-block;
-		@include font-awesome();
-		content:"\f1ce";
-		font-size:inherit;
-		animation:fa-spin 2s infinite linear;
 		position:relative;
-		top:-0.01em;
 		margin-left:0.4rem;
+		content:"";
+		width:0.75rem;
+		height:0.75rem;
+		vertical-align:text-bottom;
+		border:.15em solid #fff;
+		border-right-color:transparent;
+		border-radius:50%;
+		-webkit-animation:spinner-border .75s linear infinite;
+		animation:spinner-border .75s linear infinite;
 	}
 }
 

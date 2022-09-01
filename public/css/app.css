@@ -109,12 +109,6 @@ body {
   background: #f9fbfb;
   min-width: 300px; }
 
-.app-header {
-  background: #333;
-  border-radius: 0.25rem;
-  margin-top: 20px;
-  padding: 1rem 2rem; }
-
 .app-stage {
   padding: 2rem 0 4rem 0;
   font-size: 0.8125rem; }
@@ -200,26 +194,6 @@ body {
 
 .nv-panel-section {
   border-top: 1px solid #ccd5db; }
-
-/* panel footer */
-.nv-panel-footer {
-  border-top: 1px solid #ccd5db;
-  display: flex;
-  flex-direction: row;
-  background: #fff; }
-
-.nv-panel-footer-item {
-  flex-grow: 1;
-  text-align: center; }
-  .nv-panel-footer-item a {
-    display: block;
-    padding: 1em;
-    text-decoration: none; }
-  .nv-panel-footer-item .fa {
-    margin-right: 0.4rem; }
-
-.nv-panel-footer-item:not(:last-child) {
-  border-right: 1px solid #e0edf5; }
 
 /* tabs */
 .nv-panel-tabs {
@@ -931,19 +905,17 @@ body {
   pointer-events: none; }
   .nv-btn.is-loading:after {
     display: inline-block;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    font-family: "Font Awesome 5 Free";
-    content: "\f1ce";
-    font-size: inherit;
-    animation: fa-spin 2s infinite linear;
     position: relative;
-    top: -0.01em;
-    margin-left: 0.4rem; }
+    margin-left: 0.4rem;
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    vertical-align: text-bottom;
+    border: .15em solid #fff;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite; }
 
 /* btn icons */
 .btn-icon-left {
@@ -1772,6 +1744,32 @@ select.form-input {
         width: 275px; } }
   .nv-form-row .nv-form-control {
     margin: 0.1rem 0.6rem 0 -4px; }
+
+/* main header */
+.app-header {
+  background: #333;
+  border-radius: 0.25rem;
+  margin-top: 20px;
+  padding: 1rem 2rem; }
+
+.app-menu {
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  list-style: none;
+  margin: 0 -0.5rem 0 0;
+  padding: 0;
+  font-size: 0.875rem; }
+  .app-menu li:not(:first-child) {
+    margin-left: 0.5rem; }
+  .app-menu a {
+    display: block;
+    padding: 1rem 0.5rem;
+    color: #adadad;
+    transition: color .3s ease; }
+    .app-menu a:hover {
+      color: #fff;
+      transition: none; }
 
 /* section list */
 .nv-section-sm {

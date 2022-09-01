@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\CadastrarNegociacaoAction;
 use App\Models\Ativo;
+use App\Models\Negociacao;
 use App\Repositories\NegociacaoRepository;
 use Illuminate\Http\Request;
 
@@ -35,5 +36,12 @@ class NegociacaoController extends Controller
 		$action = new CadastrarNegociacaoAction($request->all());
 
 		return $this->respond($action->execute(), true);
+	}
+
+	public function show($id)
+	{
+		$negociacao = Negociacao::with('lancamentos.ativo')->where('id', $id)->firstOrFail();
+
+		return view('negociacoes.show', compact('negociacao'));
 	}
 }

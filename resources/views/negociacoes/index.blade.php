@@ -23,13 +23,25 @@
 					<tr>
 						<th class="collapsed">Código</th>
 						<th>Data</th>
+						<th class="text-right">Valor (R$)</th>
+						<th class="collapsed"></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($negociacoes as $n)
 					<tr>
-						<td class="collapsed">{{ $n->codigo }}</td>
+						<td class="collapsed">
+							<a href="{{ route('negociacoes.show', $n->id) }}">
+								{{ $n->codigo }}
+							</a>
+						</td>
 						<td>{{ $n->dataPresenter() }}</td>
+						<td class="text-right">{{ $n->valorPresenter() }}</td>
+						<td class="collapsed">
+							<a href="{{ route('negociacoes.show', $n->id) }}" class="nv-btn nv-btn-light nv-btn-sm">
+								<span class="la la-angle-right"></span>
+							</a>
+						</td>
 					</tr>
 					@endforeach
 				</tbody>

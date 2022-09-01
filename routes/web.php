@@ -28,4 +28,10 @@ Route::get('/negociacoes/{negociacao}', [\App\Http\Controllers\NegociacaoControl
 Route::get('/negociacoes/{negociacao}/editar', [\App\Http\Controllers\NegociacaoController::class, 'edit'])->name('negociacoes.edit');
 Route::put('/negociacoes/{negociacao}/editar', [\App\Http\Controllers\NegociacaoController::class, 'update'])->name('negociacoes.update');
 
+Route::get('/apuracoes', [\App\Http\Controllers\ApuracaoController::class, 'index'])->name('apuracoes.index');
+Route::get('/apuracoes/cadastrar', [\App\Http\Controllers\ApuracaoController::class, 'create'])->name('apuracoes.create');
+Route::post('/apuracoes/cadastrar', [\App\Http\Controllers\ApuracaoController::class, 'store'])->name('apuracoes.store');
+Route::get('/apuracoes/{apuracao}', [\App\Http\Controllers\ApuracaoController::class, 'show'])->name('apuracoes.show');
+Route::delete('/apuracoes/{apuracao}', [\App\Http\Controllers\ApuracaoController::class, 'destroy'])->name('apuracoes.destroy');
+
 // Route::get('/user', [UserController::class, 'index']);

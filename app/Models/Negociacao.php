@@ -24,4 +24,9 @@ class Negociacao extends Model
 	{
 		return Carbon::createFromFormat('Y-m-d', $this->data)->format('d/m/y');
 	}
+
+	public function valorPresenter()
+	{
+		return dollarToReal($this->valor);
+	}
 }

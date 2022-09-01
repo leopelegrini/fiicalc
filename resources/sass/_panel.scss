@@ -72,29 +72,6 @@
 	border-top:1px solid #ccd5db;
 }
 
-/* panel footer */
-.nv-panel-footer {
-	border-top:1px solid #ccd5db;
-	display:flex;
-	flex-direction:row;
-	background:#fff;
-}
-.nv-panel-footer-item {
-	flex-grow:1;
-	text-align:center;
-	a {
-		display:block;
-		padding:1em;
-		text-decoration:none;
-	}
-	.fa {
-		margin-right:0.4rem;
-	}
-}
-.nv-panel-footer-item:not(:last-child){
-	border-right:1px solid #e0edf5;
-}
-
 /* tabs */
 .nv-panel-tabs {
 	font-size:0.8125rem;

@@ -6,24 +6,22 @@
 	<title>{{ config('app.name', 'FII Calc') }}</title>
 	<link rel="stylesheet" href="{{ url('lib/bootstrap/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ url('css/app.css') }}?v={!! filemtime('css/app.css') !!}">
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
 
 	<div class="app-container">
     	<header class="app-header">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-light text-decoration-none">
                     FII CALC
                 </a>
-                <ul class="nav nav-pills ml-auto">
-                    <li><a href="{{ route('home') }}" class="nav-link px-2">Início</a></li>
-                    <li><a href="{{ route('ativos.index') }}" class="nav-link px-2">Ativos</a></li>
-                    <li><a href="{{ route('negociacoes.index') }}" class="nav-link px-2">Negociações</a></li>
-                    {{--
-                    <li class="ms-2">
-                        <a href="/logout" class="btn btn-outline-primary me-2">Sair</a>
-                    </li>
-                    --}}
+                <ul class="app-menu">
+                    <li><a href="{{ route('home') }}">Início</a></li>
+                    <li><a href="{{ route('ativos.index') }}">Ativos</a></li>
+                    <li><a href="{{ route('negociacoes.index') }}">Negociações</a></li>
+                    <li><a href="{{ route('apuracoes.index') }}">Apurações</a></li>
+                    {{--<li class="ms-2"><a href="/logout" class="btn btn-outline-primary me-2">Sair</a></li>--}}
                 </ul>
             </div>
     	</header>
