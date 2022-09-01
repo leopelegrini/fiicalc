@@ -13,34 +13,37 @@
 		</div>
 	</div>
 
-	<div class="nv-panel">
-		<div class="nv-panel-pad">
+	@include('inc.alert')
 
-			@if($negociacoes->count())
+	@if($negociacoes->count())
 
-				<table class="app-table">
-					<thead>
-						<tr>
-							<th class="collapsed">Código</th>
-							<th>Data</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($negociacoes as $n)
-						<tr>
-							<td class="collapsed">{{ $n->codigo }}</td>
-							<td>{{ $n->data }}</td>
-						</tr>
-						@endforeach
-					</tbody>
-				</table>
-
-			@else
-
-				<div class="alert alert-warning mb-0">Nenhuma negociação por enquanto</div>
-
-			@endif
+		<div class="nv-section">
+			<table class="nv-table">
+				<thead>
+					<tr>
+						<th class="collapsed">Código</th>
+						<th>Data</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($negociacoes as $n)
+					<tr>
+						<td class="collapsed">{{ $n->codigo }}</td>
+						<td>{{ $n->dataPresenter() }}</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
 		</div>
-	</div>
+
+	@else
+
+		<div class="nv-panel">
+			<div class="nv-panel-pad">
+				<div class="alert alert-warning mb-0">Nenhuma negociação por enquanto</div>
+			</div>
+		</div>
+
+	@endif
 
 @endsection

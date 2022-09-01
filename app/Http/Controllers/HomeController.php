@@ -2,25 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Ativo;
 
 class HomeController extends Controller
 {
-	private $repository;
-
-	public function __construct()
-	{
-	}
-
 	public function index()
 	{
-		/*
-		DB::table('ativos')
-			->where('qtd', '>', 0)
-			->orderBy('id', 'asc')
+		$ativos = Ativo::where('qtd', '>', 0)
+			->orderBy('codigo', 'asc')
 			->get();
-		*/
 
-		return view('index');
+		return view('index', compact('ativos'));
 	}
 }

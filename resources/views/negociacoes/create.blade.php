@@ -143,7 +143,7 @@
 
 				vm.errors = [];
 
-				//vm.loading = true;
+				vm.loading = true;
 
 				axios.post('{{ route("negociacoes.store") }}', {
 					data: vm.data,
@@ -152,6 +152,7 @@
 				})
 				.then(function(response){
 					//window.location.href = '/negociacoes/' + response.data.data.negociacao.id;
+					window.location.href = '{{ route("negociacoes.index") }}';
 				})
 				.catch(function(error){
 

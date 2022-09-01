@@ -34,6 +34,6 @@ class NegociacaoController extends Controller
 	{
 		$action = new CadastrarNegociacaoAction($request->all());
 
-		return $this->respond($action->execute());
+		return $this->respond($action->execute(), true);
 	}
 }

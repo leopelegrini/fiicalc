@@ -18,8 +18,8 @@ return new class extends Migration
 			$table->date('data');
 			$table->unsignedTinyInteger('operacao'); // 0: Compra, 1: Venda
             $table->integer('qtd');
-            $table->double('preco_unitario', 16, 8);
-			$table->double('preco_total', 16, 8);
+            $table->double('preco_unitario_bruto', 16, 8);
+			$table->double('preco_total_bruto', 16, 8);
 
 			$table->decimal('taxas', 12, 8);
 			$table->double('preco_unitario_liquido', 16, 8);
@@ -31,11 +31,15 @@ return new class extends Migration
 			$table->double('saldo_venda', 16, 8)->nullable();
 
 			$table->unsignedBigInteger('negociacao_id');
-            $table->unsignedBigInteger('ativo_id');
+            $table->unsignedBigInteger('ativo_id')->index();
             $table->unsignedBigInteger('apuracao_id')->nullable();
             //$table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
+
+			$table->foreign('negociacao_id')
+                ->references('id')->on('negociacoes')
+                ->onDelete('cascade');
         });
     }
 

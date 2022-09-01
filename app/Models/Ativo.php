@@ -13,4 +13,9 @@ class Ativo extends Model
     use SoftDeletes;
 
     protected $table = 'ativos';
+
+	public function precoMedioPresenter()
+	{
+		return dollarToReal($this->preco_medio);
+	}
 }

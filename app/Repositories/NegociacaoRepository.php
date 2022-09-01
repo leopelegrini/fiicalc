@@ -2,15 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Models\Negociacao;
 use Illuminate\Support\Facades\DB;
 
 class NegociacaoRepository
 {
 	public function consultar()
 	{
-		$negociacoes = DB::table('negociacoes')
-			->whereNull('deleted_at')
-			->orderBy('data', 'desc')
+		$negociacoes = Negociacao::orderBy('data', 'desc')
 			->orderBy('created_at', 'desc')
 			->paginate(30);
 

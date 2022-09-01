@@ -4,8 +4,10 @@ namespace App\Actions;
 
 use App\Exceptions\ArrayValidationException;
 use App\Exceptions\ExceptionHandler;
+use App\Models\Ativo;
 use App\Models\Lancamento;
 use App\Models\Negociacao;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -27,6 +29,8 @@ class CadastrarNegociacaoAction
 
 			$this->format();
 
+			$ativos = Ativo::whereIn('id', array_column($this->data['ativos'], 'id'))->get();
+
 			DB::beginTransaction();
 
 			$negociacao = new Negociacao();
@@ -44,41 +48,97 @@ class CadastrarNegociacaoAction
 			$negociacao->valor = $negociacao->taxas;
 
 			foreach($this->data['ativos'] as $ativo){
-				$negociacao->valor = bcadd($negociacao->valor, $ativo['total_sem_corretagem'], 8);
+				$negociacao->valor = bcadd($negociacao->valor, $ativo['preco_total_bruto'], 8);
 			}
 
 			$negociacao->save();
 
 			foreach($this->data['ativos'] as $ativo){
 
-				$percentual = bcdiv(bcmul($ativo['total_sem_corretagem'], 100, 8), $negociacao->valor, 8);
+				$ativo_posicao = $ativos->where('id', '=', $ativo['id'])->first();
+
+				if($ativo_posicao == null){
+					throw new Exception('Ativo inválido');
+				}
+
+				$ultimo_lancamento = Lancamento::where('ativo_id', $ativo)->orderBy('id', 'desc')->first();
+
+				$percentual = bcdiv(bcmul($ativo['preco_total_bruto'], 100, 8), $negociacao->valor, 8);
 
 				$lancamento = new Lancamento();
 
+				$lancamento->data = $negociacao->data;
+
+				$lancamento->operacao = bccomp($ativo['qtd'], 0, 1) === 1 ? 0 : 1;
+
 				$lancamento->qtd = $ativo['qtd'];
 
-				$lancamento->preco = $ativo['preco'];
+				$lancamento->preco_unitario_bruto = $ativo['preco_unitario_bruto'];
 
-				$lancamento->total_sem_corretagem = $ativo['total_sem_corretagem'];
+				$lancamento->preco_total_bruto = $ativo['preco_total_bruto'];
 
 				$lancamento->taxas = bcdiv(bcmul($percentual, $this->data['taxas'], 8), 100, 8);
 
-				$lancamento->total_com_corretagem = bcadd($lancamento->total_sem_corretagem, $lancamento->taxas, 8);
+				$taxas_valor_unitario = bcdiv($lancamento->taxas, $lancamento->qtd, 8);
 
-				$lancamento->preco_com_corretagem = bcdiv($lancamento->total_com_corretagem, $lancamento->qtd, 8);
+				if($lancamento->operacao == 0){
+
+					// para compras, acrescentar taxas no preço
+
+					$lancamento->preco_unitario_liquido = bcadd($lancamento->preco_unitario_bruto, $taxas_valor_unitario, 8);
+
+					$lancamento->preco_total_liquido = bcadd($lancamento->preco_total_bruto, $lancamento->taxas, 8);
+
+					if($ultimo_lancamento){
+
+						$lancamento->qtd_acumulada = bcadd($ultimo_lancamento->qtd_acumulada, $lancamento->qtd, 0);
+
+						$valor_em_estoque = bcmul($ultimo_lancamento->preco_unitario_mp, $ultimo_lancamento->qtd_acumulada, 8);
+
+						$valor_adquirido = $lancamento->preco_total_liquido;
+
+						$lancamento->preco_unitario_mp = bcdiv(bcadd($valor_em_estoque, $valor_adquirido, 8), $lancamento->qtd_acumulada, 8);
+
+					} else {
+
+						$lancamento->preco_unitario_mp = $lancamento->preco_unitario_liquido;
+
+						$lancamento->qtd_acumulada = $lancamento->qtd;
+					}
+				}
+				else {
+
+					// para vendas, subtrair taxas do preço
+
+					$lancamento->preco_unitario_liquido = bcsub($lancamento->preco_unitario_bruto, $taxas_valor_unitario, 8);
+
+					$lancamento->preco_total_liquido = bcsub($lancamento->preco_total_bruto, $lancamento->taxas, 8);
+
+					$lancamento->preco_unitario_mp = $ultimo_lancamento->preco_unitario_mp;
+
+					$lancamento->qtd_acumulada = bcadd($ultimo_lancamento->qtd_acumulada, $lancamento->qtd, 0);
+
+					$lancamento->saldo_venda = bcmul(bcsub($lancamento->preco_unitario_liquido, $lancamento->preco_unitario_mp, 8), $lancamento->qtd, 8);
+				}
 
 				$lancamento->negociacao_id = $negociacao->id;
 
 				$lancamento->ativo_id = $ativo['id'];
 
 				$lancamento->save();
+
+				$ativo_posicao->preco_medio = $lancamento->preco_unitario_mp;
+
+				$ativo_posicao->qtd = $lancamento->qtd_acumulada;
+
+				$ativo_posicao->save();
 			}
 
 			DB::commit();
 
 			return [
 				'status' => 'success',
-				'message' => 'Ativo cadastrado com sucesso'
+				'message' => 'Negociação lançada com sucesso'
 			];
 		}
 		catch(Exception $e){
@@ -143,9 +203,9 @@ class CadastrarNegociacaoAction
 
 			$this->data['ativos'][$key]['qtd'] = realToDollar($ativo['qtd']);
 
-			$this->data['ativos'][$key]['preco'] = realToDollar($ativo['preco']);
+			$this->data['ativos'][$key]['preco_unitario_bruto'] = realToDollar($ativo['preco']);
 
-			$this->data['ativos'][$key]['preco_total'] = bcmul($this->data['ativos'][$key]['qtd'], $this->data['ativos'][$key]['preco'], 8);
+			$this->data['ativos'][$key]['preco_total_bruto'] = bcmul($this->data['ativos'][$key]['qtd'], $this->data['ativos'][$key]['preco_unitario_bruto'], 8);
 		}
 	}
 
