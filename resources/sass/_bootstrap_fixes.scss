@@ -1,0 +1,45 @@
+/* dropdown font size */
+.app-stage .dropdown-menu {
+	font-size:0.875rem;
+}
+
+/* alerts */
+.alert-warning {
+	border-color:#ffe494;
+}
+.alert .nv-btn {
+	margin-left:0.5rem;
+	vertical-align:middle;
+}
+.alert-dismissible .close {
+	bottom:0;
+	padding:.7rem 1.25rem .75rem 1.25rem;
+}
+
+/* pagination */
+.pagination {
+	margin-top:1.5rem;
+	flex-wrap:wrap;
+	@media(min-width:$phone){
+		margin-top:2rem;
+	}
+}
+
+/* datepicker */
+.table-condensed>tbody>tr>td,
+.table-condensed>tbody>tr>th,
+.table-condensed>tfoot>tr>td,
+.table-condensed>tfoot>tr>th,
+.table-condensed>thead>tr>td,
+.table-condensed>thead>tr>th {
+	padding:4px;
+}
+
+.dropdown-item.has-icon {
+	padding-left:1rem;
+}
+.nv-dropdown-icon {
+	width:1.5rem;
+	text-align:center;
+	margin-right:0.25rem;
+}

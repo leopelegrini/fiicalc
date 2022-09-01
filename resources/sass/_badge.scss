@@ -1,0 +1,54 @@
+.nv-badge {
+	display:inline-block;
+	padding:.25em .4em;
+	font-size:0.75rem;
+	font-weight:600;
+	line-height:1;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:baseline;
+	border-radius:.25rem;
+	background:#eee;
+}
+.nv-badge-primary {
+	background:$color-primary;
+	color:#fff;
+}
+.nv-badge-light {
+	color:$color-default;
+	background:$color-light;
+}
+.nv-badge-success {
+	color:#fff;
+	background:#61b240;
+}
+.nv-badge-danger {
+	color:#fff;
+	background:$color-danger;
+}
+.nv-badge-warning {
+	color:darken($color-warning, 40%);
+	background:$color-warning;
+}
+.nv-badge-info {
+	color:#fff;
+	background:darken($color-info, 5%);
+}
+.nv-badge-dark {
+	color:#fff;
+	background:$color-dark;
+}
+.nv-badge-navy {
+	color:#fff;
+	background:$color-navy;
+}
+.nv-badge-icon {
+	font-size:0.625rem;
+	vertical-align:top;
+}
+.nv-badge-icon-left {
+	margin-right:0.2rem;
+}
+.nv-badge-icon-right {
+	margin-left:0.2rem;
+}

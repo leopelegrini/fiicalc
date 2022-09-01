@@ -1,0 +1,22 @@
+html, body {
+	height:100%;
+}
+body {
+	background:#f9fbfb;
+	min-width:300px;
+}
+.app-header {
+	background:#333;
+	border-radius:0.25rem;
+	margin-top:20px;
+	padding:1rem 2rem;
+}
+.app-stage {
+	padding:2rem 0 4rem 0;
+	font-size:0.8125rem;
+}
+.app-container {
+	max-width:900px;
+	margin:auto;
+	padding:0 20px;
+}

@@ -1,0 +1,100 @@
+.nv-card-button-list .nv-card-button:not(:first-child){
+	margin-top:0.5rem;
+}
+.nv-card-button {
+	display:flex;
+	flex-grow:1;
+	width:100%;
+	text-align:left;
+	border:1px solid $color-light;
+	border-radius:4px;
+	padding:0.75rem 0.9375rem 0.75rem 0.75rem;
+	background:#fff;
+	align-items:center;
+	line-height:1.2;
+	transition:border 0.3s ease;
+	outline:0;
+	&:hover {
+		transition:none;
+		text-decoration:none;
+	}
+	&.is-active {
+		background:#f4f8fa;
+		border-color:#b7d1e1;
+		box-shadow:0 0px 0px 3px #e9f1f6 inset;
+	}
+	&:focus {
+		outline:0;
+	}
+	&:focus-visible {
+		box-shadow:0 0 0 3px rgba(0,0,0,0.07);
+	}
+}
+.nv-card-button:hover {
+	border-color:$color-primary;
+}
+.nv-card-button-icon {
+	background:darken($color-light, 1%);
+	width:2.75rem;
+	height:2.75rem;
+	border-radius:100%;
+	font-size:1rem;
+	line-height:1;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin-right:0.5rem;
+	color:darken($color-light, 22%);
+}
+.nv-card-button-icon-success {
+	background:lighten($color-success, 45%);
+	color:$color-success;
+}
+.nv-card-button-icon-warning {
+	background:lighten($color-warning, 30%);
+	color:darken($color-warning, 12%);
+}
+.nv-card-button-icon-danger {
+	background:lighten($color-danger, 35%);
+	color:$color-danger;
+}
+.nv-card-button-sm {
+	padding:0.5rem;
+	.nv-card-button-icon {
+		width:2rem;
+		height:2rem;
+		margin-right:0.3rem;
+		font-size:0.875rem;
+	}
+}
+.nv-card-button-content {
+	flex-grow:1;
+	margin-left:0.25rem;
+}
+.nv-card-button-title {
+	font-size:0.9375rem;
+	font-weight:600;
+	color:$color-default;
+	margin-bottom:0.2rem;
+}
+.nv-card-button-text {
+	color:darken($color-navy, 4%);
+	padding-top:0.05rem;
+	font-size:0.8125rem;
+}
+.nv-card-button-arrow {
+	font-size:0.9375rem;
+	color:darken($color-light, 15%);
+	margin-left:0.5rem;
+}
+.nv-card-button-number {
+	font-size:1.75rem;
+	font-weight:600;
+	line-height:1;
+	color:darken($color-light, 50%);
+	letter-spacing:-0.05rem;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	margin-right:0.5rem;
+}

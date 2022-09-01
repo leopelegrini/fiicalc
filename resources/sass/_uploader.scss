@@ -1,0 +1,25 @@
+/* upload dropzone */
+.nv-dropzone {
+  border:2px dashed #dce1e4;
+  border-radius:5px;
+  padding:1rem;
+  text-align:center;
+  background:#fbfcfd;
+}
+.nv-dropzone.in {
+  border-color:$color-navy;
+}
+.nv-dropzone .nv-dropzone-title {
+  margin:0;
+  color:#9cacb4;
+  font-size:1.25rem;
+}
+.nv-dropzone-title-icon {
+  margin-right:0.7rem;
+}
+.nv-dropzone.hover {
+  border-color:$color-primary;
+  .nv-dropzone-title {
+    color:#76a5e4;
+  }
+}

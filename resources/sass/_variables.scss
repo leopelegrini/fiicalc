@@ -1,0 +1,104 @@
+$color-default: #364150;
+$color-primary: #4b89dc;
+$color-secondary: #aab2bd;
+$color-success: #05AB3C;
+$color-danger: #db4453;
+$color-warning: #f3b944;
+$color-info: #967bdc;
+$color-light: #e6e9ee;
+$color-dark: #434a54;
+$color-navy: #6c757d;
+$color-border-light: rgba(0,0,0,0.08);
+$color-link: #0074f0;
+$color-link-hover: #3f9cff;
+
+$widescreen:1200px;
+$desktop:992px;
+$tablet:768px;
+$phablet:576px;
+$phone:480px;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i');
+$font: 'Open Sans', sans-serif;
+
+@mixin font-awesome(){
+	-moz-osx-font-smoothing:grayscale;
+	-webkit-font-smoothing:antialiased;
+	font-style:normal;
+	font-variant:normal;
+	text-rendering:auto;
+	line-height:1;
+	font-family:"Font Awesome 5 Free";
+}
+
+html {
+	font-size:16px;
+}
+body {
+	font-family:$font;
+	font-size:1rem;
+}
+
+a {
+	font-weight:600;
+	color:#0074f0;
+	&:hover {
+		text-decoration:none;
+		color:#3f9cff;
+	}
+}
+
+@mixin nv-link($color){
+	color:$color;
+	a {
+		color:$color;
+		&:hover {
+			color:darken($color, 15%);
+		}
+	}
+}
+
+.nv-text-default {
+	@include nv-link($color-default);
+}
+.nv-text-primary {
+	@include nv-link(#0043ff);
+}
+.nv-text-secondary {
+	@include nv-link($color-secondary);
+}
+.nv-text-success {
+	@include nv-link($color-success);
+}
+.nv-text-danger {
+	@include nv-link($color-danger);
+}
+.nv-text-warning {
+	@include nv-link($color-warning);
+}
+.nv-text-info {
+	@include nv-link($color-info);
+}
+.nv-text-light {
+	@include nv-link($color-light);
+}
+.nv-text-dark {
+	@include nv-link($color-dark);
+}
+.nv-text-navy {
+	@include nv-link($color-navy);
+}
+.nv-text-purple {
+	@include nv-link(#934bff);
+}
+.nv-text-bold {
+	font-weight:700;
+}
+.nv-text-semibold {
+	font-weight:600;
+}
+.nv-text-muted {
+	color:#6c757d;
+    font-style:italic;
+	font-weight:600;
+}

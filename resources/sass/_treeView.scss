@@ -1,0 +1,80 @@
+// Table
+.treeview-item {
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	position:relative;
+	&::before {
+		display:none;
+		content:"";
+		position:absolute;
+		left:0;
+		top:50%;
+		background:#dee4e8;
+		height:1px;
+	}
+}
+.treeview-produto-grupo {
+	.treeview-item-level-2 {
+		padding-left:1.7rem;
+		&::before {
+			display:block;
+			width:1.3rem;
+		}
+	}
+	.treeview-item-level-3 {
+		padding-left:4.5rem;
+		&::before {
+			display:block;
+			width:2.3rem;
+			left:1.7rem;
+		}
+	}
+}
+
+// Div
+.nv-tree {
+	background:#fff;
+	border:1px solid #dee4e8;
+	.nv-form-control-str {
+		padding-left:1.8rem;
+    	padding-top:0.1rem;
+	}
+}
+.nv-tree-item-content {
+	display:flex;
+	align-items:center;
+	position:relative;
+	padding:0.4rem 0.6rem;
+	&::before {
+		display:none;
+		content:"";
+		position:absolute;
+		top:50%;
+		background:#dee4e8;
+		height:1px;
+		margin-top:-1px;
+	}
+}
+.nv-tree .nv-tree-item-level-1 > .nv-tree-item-content {
+	border-top:1px solid #dee4e8;
+}
+.nv-tree .nv-tree-item:first-child > .nv-tree-item-content {
+	border-top:0;
+}
+.nv-tree-item-level-2 .nv-tree-item-content {
+	padding-left:2.5rem;
+	&::before {
+		display:block;
+		width:1.4rem;
+		left:0.9rem;
+	}
+}
+.nv-tree-item-level-3 .nv-tree-item-content {
+	padding-left:4.4rem;
+	&::before {
+		display:block;
+		width:3.2rem;
+		left:0.9rem;
+	}
+}
