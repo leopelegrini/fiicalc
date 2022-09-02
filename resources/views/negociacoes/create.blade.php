@@ -13,6 +13,10 @@
 
 			<div class="form-row">
 				<div class="col-md-3">
+					<label class="form-label">Nº da Nota</label>
+					<input type="text" class="form-input" v-model="numero">
+				</div>
+				<div class="col-md-3">
 					<label class="form-label">Data</label>
 					<input type="date" class="form-input" placeholder="__/__/____" v-model="data">
 				</div>
@@ -131,6 +135,7 @@
 				preco: '',
 				operacao: 0
 			},
+			numero: '',
 			data: '{{ date("Y-m-d") }}',
 			taxas: '0,00',
 			ativos: [],
@@ -167,12 +172,13 @@
 				vm.loading = true;
 
 				axios.post('{{ route("negociacoes.store") }}', {
+					numero: vm.numero,
 					data: vm.data,
 					taxas: vm.taxas,
 					ativos: vm.ativos
 				})
 				.then(function(response){
-					window.location.href = '/negociacoes/' + response.data.id;
+					window.location.href = '/negociacoes/' + response.data.data.id;
 				})
 				.catch(function(error){
 

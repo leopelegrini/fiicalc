@@ -9,59 +9,6 @@
 .nv-panel.is-first {
 	margin-top:0;
 }
-.nv-panel-header {
-	padding:0.6rem 0.8rem 0.625rem 0.8rem;
-	border-bottom:1px solid #ccd5db;
-	display:flex;
-	flex-direction:row;
-	justify-content:space-between;
-	align-items:center;
-	background:#e4e9f1;
-	border-top-left-radius:4px;
-	border-top-right-radius:4px;
-}
-.nv-panel-header-title {
-	width:100%;
-	margin:0;
-	color:$color-default;
-	font-size:0.875rem;
-	font-weight:600;
-	text-transform:uppercase;
-}
-.nv-panel-header-icon {
-	margin-right:0.5rem;
-}
-.nv-panel-body {
-	position:relative;
-}
-.nv-panel-body.is-loading {
-	min-height:4rem;
-	&:before {
-		display:block;
-		content:"";
-		position:absolute;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background:rgba(255,255,255,0.85);
-		z-index:4;
-	}
-	&:after {
-		content:"\f1ce";
-		display:inline-block;
-		@include font-awesome();
-		font-size:1.75rem;
-		color:$color-info;
-		text-align:center;
-		animation:fa-spin 2s infinite linear;
-		position:absolute;
-		top:10%;
-		left:50%;
-		margin-left:-0.875rem;
-		z-index:5;
-	}
-}
 .nv-panel-pad {
 	padding:1rem;
 	@media(min-width:$phone){
@@ -70,59 +17,4 @@
 }
 .nv-panel-section {
 	border-top:1px solid #ccd5db;
-}
-
-/* tabs */
-.nv-panel-tabs {
-	font-size:0.8125rem;
-	font-weight:600;
-	margin-bottom:-1px;
-	overflow-x:auto;
-	-webkit-overflow-scrolling:touch;
-
-	ul {
-		display:flex;
-		list-style:none;
-		margin:0;
-		padding:0;
-	}
-	li {
-		display:block;
-		list-style:none;
-		margin:0;
-		padding:0;
-	}
-	li:not(:first-child) {
-		margin-left:4px;
-	}
-	a {
-		display:flex;
-		align-items:center;
-		justify-content:center;
-		height:2.4rem;
-		padding:0 0.8rem;
-		text-decoration:none;
-		color:#7d86a1;
-		background:#ebeff5;
-		border:1px solid #ebeff5;
-		border-bottom-color:#ccd5db;
-		transition:background 0.4s ease, color 0.4s ease, border 0.4s ease;
-		&:hover {
-			background:#fff;
-			color:$color-primary;
-			border-color:#ccd5db;
-			transition:none;
-		}
-	}
-	.is-active {
-		a {
-			background:#f5f7fa;
-			border-color:#ccd5db;
-			border-bottom-color:transparent;
-			color:$color-dark;
-		}
-	}
-	.tab-icon {
-		margin-right:0.5rem;
-	}
 }

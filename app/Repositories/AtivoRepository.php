@@ -37,7 +37,15 @@ class AtivoRepository
 		try {
 
 			$validator = Validator::make($data, [
-				'codigo' => 'required'
+				'codigo' => [
+					'bail',
+					'required',
+					function($attribute, $value, $fail){
+						if(Ativo::where('codigo', $value)->first()){
+							$fail("O ativo {$value} já está cadastrado");
+						}
+					}
+				]
 			]);
 
 			if($validator->fails()){

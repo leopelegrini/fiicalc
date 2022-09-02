@@ -21,7 +21,7 @@
 			<table class="nv-table">
 				<thead>
 					<tr>
-						<th class="collapsed">Código</th>
+						<th class="collapsed">Nº Nota</th>
 						<th>Data</th>
 						<th class="text-right">Valor (R$)</th>
 						<th class="collapsed"></th>
@@ -32,7 +32,7 @@
 					<tr>
 						<td class="collapsed">
 							<a href="{{ route('negociacoes.show', $n->id) }}">
-								{{ $n->codigo }}
+								{{ $n->numero }}
 							</a>
 						</td>
 						<td>{{ $n->dataPresenter() }}</td>

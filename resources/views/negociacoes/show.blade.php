@@ -4,7 +4,7 @@
 
 	<div class="row nv-page-title-bar">
 		<div class="col">
-			<h5 class="nv-page-title">Negociação {{ $negociacao->codigo }}</h5>
+			<h5 class="nv-page-title">Negociação {{ $negociacao->numero }}</h5>
 		</div>
 	</div>
 

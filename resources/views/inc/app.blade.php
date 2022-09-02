@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ config('app.name', 'FII Calc') }}</title>
 	<link rel="stylesheet" href="{{ url('lib/bootstrap/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url('lib/toastr/toastr.css') }}?v={!! filemtime('css/app.css') !!}">
 	<link rel="stylesheet" href="{{ url('css/app.css') }}?v={!! filemtime('css/app.css') !!}">
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
@@ -41,9 +42,8 @@
 	<script type="text/javascript" src="{{ asset('lib/axios/axios.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('lib/accounting/accounting.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('lib/vue/vue.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('lib/lodash/lodash.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('lib/nv-autocomplete/nv-autocomplete.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('lib/nv-currency/nv-currency.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('lib/toastr/toastr.min.js') }}"></script>
 
 	@yield('scripts')
 

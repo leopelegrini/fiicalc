@@ -21,16 +21,6 @@ $phone:480px;
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i');
 $font: 'Open Sans', sans-serif;
 
-@mixin font-awesome(){
-	-moz-osx-font-smoothing:grayscale;
-	-webkit-font-smoothing:antialiased;
-	font-style:normal;
-	font-variant:normal;
-	text-rendering:auto;
-	line-height:1;
-	font-family:"Font Awesome 5 Free";
-}
-
 html {
 	font-size:16px;
 }

@@ -35,11 +35,7 @@ class CadastrarNegociacaoAction
 
 			$negociacao = new Negociacao();
 
-			$negociacao->ano = date('y');
-
-			$negociacao->numero = $this->gerarNumero();
-
-			$negociacao->codigo = $negociacao->ano . '.' . str_pad($negociacao->numero, '3', '0', STR_PAD_LEFT);
+			$negociacao->numero = $this->data['numero'];
 
 			$negociacao->data = $this->data['data'];
 
@@ -157,6 +153,15 @@ class CadastrarNegociacaoAction
 	private function validate()
 	{
 		$validator = Validator::make($this->data, [
+			'numero' => [
+				'bail',
+				'required',
+				function($attribute, $value, $fail){
+					if(Negociacao::where('numero', '=', $value)->first()){
+						$fail('O código informado já existe');
+					}
+				}
+			],
 			'data' => 'required',
 			'taxas' => 'required'
 		], [
@@ -218,16 +223,5 @@ class CadastrarNegociacaoAction
 
 			$this->data['ativos'][$key]['preco_total_bruto'] = bcmul($this->data['ativos'][$key]['qtd'], $this->data['ativos'][$key]['preco_unitario_bruto'], 8);
 		}
-	}
-
-	private function gerarNumero()
-	{
-		$ultimo_numero = DB::table('negociacoes')
-			->select('numero')
-			->where('ano', '=', date('y'))
-			->orderBy('numero', 'desc')
-			->first();
-
-		return $ultimo_numero ? $ultimo_numero->numero + 1 : 1;
 	}
 }

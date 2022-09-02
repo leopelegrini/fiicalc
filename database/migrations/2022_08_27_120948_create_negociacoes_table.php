@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('negociacoes', function (Blueprint $table) {
             $table->id();
-            $table->date('data');
-			$table->unsignedSmallInteger('ano');
-			$table->unsignedInteger('numero');
-            $table->string('codigo', 12);
+			$table->date('data');
+			$table->string('numero', 30);
 			$table->decimal('valor', 10, 2);
             $table->decimal('taxas', 6, 2);
             //$table->unsignedBigInteger('user_id');
