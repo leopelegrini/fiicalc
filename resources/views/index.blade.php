@@ -18,6 +18,7 @@
 						<th class="collapsed">Ativo</th>
 						<th class="text-right">Quantidade</th>
 						<th class="text-right">Preço médio (R$)</th>
+						<th class="text-right">Alocação (%)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,6 +27,7 @@
 						<td class="collapsed">{{ $ativo->codigo }}</td>
 						<td class="text-right">{{ $ativo->qtd }}</td>
 						<td class="text-right">{{ $ativo->precoMedioPresenter() }}</td>
+						<td class="text-right">{{ $ativo->alocacao }}</td>
 					</tr>
 					@endforeach
 				</tbody>
