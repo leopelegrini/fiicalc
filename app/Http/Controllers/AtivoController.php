@@ -43,6 +43,15 @@ class AtivoController extends Controller
 		return redirect()->route('ativos.index')->with('alert', $response);
 	}
 
+	public function show($id)
+	{
+		$ativo = Ativo::findOrFail($id);
+
+		return view('ativos.show', [
+			'ativo' => $ativo
+		]);
+	}
+
 	public function autocomplete(Request $request)
 	{
 		$keyword = $request->get('term');

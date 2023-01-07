@@ -20,13 +20,19 @@
 				<thead>
 					<tr>
 						<th class="collapsed">Código</th>
+						<th>Categoria</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach($ativos as $ativo)
 					<tr>
-						<td class="collapsed">{{ $ativo->codigo }}</td>
+						<td class="collapsed">
+							<a href="{{ route('ativos.show', $ativo->id) }}">
+								{{ $ativo->codigo }}
+							</a>
+						</td>
+						<td></td>
 						<td></td>
 					</tr>
 					@endforeach

@@ -32,6 +32,9 @@ class HomeController extends Controller
 			);
 		});
 
-		return view('index', compact('ativos'));
+		return view('index', [
+			'ativos' => $ativos,
+			'valor_total' => dollarToReal($valor_total)
+		]);
 	}
 }

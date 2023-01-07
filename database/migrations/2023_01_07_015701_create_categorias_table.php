@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ativos', function (Blueprint $table) {
+        Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
-            $table->integer('qtd')->default(0);
-            $table->double('preco_medio', 14, 8)->default(0);
-			$table->unsignedBigInteger('categoria_id');
-            //$table->unsignedBigInteger('user_id');
+			$table->string('nome', 40);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ativos');
+        Schema::dropIfExists('categorias');
     }
 };

@@ -17,8 +17,8 @@
 					<tr>
 						<th class="collapsed">Ativo</th>
 						<th class="text-right">Quantidade</th>
-						<th class="text-right">Preço médio (R$)</th>
 						<th class="text-right">Alocação (%)</th>
+						<th class="text-right">Preço médio (R$)</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,10 +26,15 @@
 					<tr>
 						<td class="collapsed">{{ $ativo->codigo }}</td>
 						<td class="text-right">{{ $ativo->qtd }}</td>
-						<td class="text-right">{{ $ativo->precoMedioPresenter() }}</td>
 						<td class="text-right">{{ $ativo->alocacao }}</td>
+						<td class="text-right">{{ $ativo->precoMedioPresenter() }}</td>
 					</tr>
 					@endforeach
+					<tr class="active">
+						<td colspan="4" class="text-right nv-text-bold">
+							{{ $valor_total }}
+						</td>
+					</tr>
 				</tbody>
 			</table>
 
