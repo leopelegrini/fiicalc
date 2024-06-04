@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('codigo')->unique();
             $table->integer('qtd')->default(0);
             $table->double('preco_medio', 14, 8)->default(0);
-			$table->unsignedBigInteger('categoria_id');
+			$table->unsignedInteger('categoria_id')->nullable();
             //$table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();

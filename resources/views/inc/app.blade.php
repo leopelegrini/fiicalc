@@ -5,8 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{{ config('app.name', 'FII Calc') }}</title>
 	<link rel="stylesheet" href="{{ url('lib/bootstrap/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ url('lib/toastr/toastr.css') }}?v={!! filemtime('css/app.css') !!}">
-	<link rel="stylesheet" href="{{ url('css/app.css') }}?v={!! filemtime('css/app.css') !!}">
+	<link rel="stylesheet" href="{{ url('lib/toastr/toastr.css') }}">
+	{{--<link rel="stylesheet" href="{{ url('css/app.css') }}?v={!! filemtime('css/app.css') !!}">--}}
+	<link rel="stylesheet" href="{{ url('css/app.css') }}">
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 <body>
